@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Play } from 'phosphor-react'
 
 import {
@@ -9,6 +11,10 @@ import {
   TaskInput,
   MinutesAmountInput,
 } from './styles'
+
+// controlled / uncontrolled
+// controlled: manter em tempo real a informação do input do usuário guardada no estado da nossa aplicação.
+// uncontrolled: busca informação do valor do input somente quando precisar dela.
 
 export function Home() {
   return (
