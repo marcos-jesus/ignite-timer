@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { createContext, ReactNode, useState, useReducer, useEffect } from 'react'
-import { Cycle, cyclesReducer } from '../src/reducers/cycles/reducer'
-import { ActionTypes, addNewCycleAction, InterruptCurrentCycleAction, MarkCurrentCycleAsFinishedAction } from '../src/reducers/cycles/actions'
+import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
+import { addNewCycleAction, InterruptCurrentCycleAction, MarkCurrentCycleAsFinishedAction } from '../reducers/cycles/actions'
 import { differenceInSeconds } from 'date-fns'
 
 
@@ -11,7 +11,7 @@ interface CreateCycleData {
 }
 
 interface CyclesContextType {
-  cycles: Cycle[]
+  cycles: Cycle[] 
   activeCycle: Cycle | undefined
   activeCycleId: string | null
   amountSecondsPassed: number
@@ -28,7 +28,6 @@ interface CyclesContextProviderProps {
 }
 
 
-
 export function CyclesContextProvider({
   children,
 }: CyclesContextProviderProps) {
@@ -36,15 +35,22 @@ export function CyclesContextProvider({
     {
     cycles: [],
     activeCycleId:null,
-  }, () => {
+  } /*, (data) => {
+    console.log(data)
+
+    const { cycles } = data
+  
     const storedStateAsJSON = localStorage.getItem('@ignite-timer:cycles-state-1.0.0');
     
     if (storedStateAsJSON) {
       return JSON.parse(storedStateAsJSON)
+    } else {
+      return cycles
     }
-  })
+  } */)
 
-  const { cycles,activeCycleId } = cyclesState
+  const { cycles , activeCycleId } = cyclesState
+
   const activeCycle = cycles.find((cycle) => cycle.id === activeCycleId)
 
   const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
@@ -62,9 +68,6 @@ export function CyclesContextProvider({
   }, [cyclesState])
 
  
-
-  
-
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds)
   }

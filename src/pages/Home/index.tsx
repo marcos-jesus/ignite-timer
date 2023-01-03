@@ -14,7 +14,7 @@ import { Countdown } from './components/Countdown'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
-import { CyclesContext } from '../../../contexts/CyclesContext'
+import { CyclesContext } from '../../contexts/CyclesContext'
 
 export function Home() {
   const newCycleFormValidationSchema = zod.object({
